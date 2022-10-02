@@ -18,6 +18,7 @@ def get_birthdays_per_week(users):
     day_fri = ''
 
     today_day = datetime.now()
+    today_year = datetime.now().year
 
    # If it is Monday today when we create the 'table' of weekdays and names of birthdays persons
    # we will check previouse Saturday and Sunday to ad them to the 'table'
@@ -39,7 +40,8 @@ def get_birthdays_per_week(users):
         day_end_week = 7
 
     for person in users:
-        delta = person['birthday'].date() - today_day.date()
+        delta = person['birthday'].date().replace(
+            year=today_year) - today_day.date()
         week_day = person['birthday'].weekday()
 
         if timedelta(days=day_start_week) <= delta < timedelta(days=day_end_week):
@@ -71,20 +73,19 @@ def get_birthdays_per_week(users):
 if __name__ == '__main__':
 
     users = [
-        {'name': 'Bil_0', 'birthday': datetime(2022, 9, 23)},
-        {'name': 'Den_0', 'birthday': datetime(2022, 9, 24)},
-        {'name': 'Man_0', 'birthday': datetime(2022, 9, 25)},
-        {'name': 'Fen', 'birthday': datetime(2022, 9, 26)},
-        {'name': 'Dol', 'birthday': datetime(2022, 9, 27)},
-        {'name': 'Bal', 'birthday': datetime(2022, 9, 28)},
-        {'name': 'Gun', 'birthday': datetime(2022, 9, 29)},
-        {'name': 'Bil', 'birthday': datetime(2022, 9, 30)},
+        {'name': 'Bil_0', 'birthday': datetime(2000, 9, 23)},
+        {'name': 'Den_0', 'birthday': datetime(1969, 9, 24)},
+        {'name': 'Man_0', 'birthday': datetime(1985, 9, 25)},
+        {'name': 'Fen', 'birthday': datetime(2002, 9, 26)},
+        {'name': 'Dol', 'birthday': datetime(1999, 9, 27)},
+        {'name': 'Bal', 'birthday': datetime(2001, 9, 28)},
+        {'name': 'Gun', 'birthday': datetime(2010, 9, 29)},
+        {'name': 'Bil', 'birthday': datetime(1975, 9, 30)},
         {'name': 'Man', 'birthday': datetime(2022, 10, 1)},
-        {'name': 'Del', 'birthday': datetime(2022, 10, 2)},
+        {'name': 'Del', 'birthday': datetime(2012, 10, 2)},
         {'name': 'Bil_1', 'birthday': datetime(2022, 10, 3)},
         {'name': 'Del_1', 'birthday': datetime(2022, 10, 4)},
-        {'name': 'Ben_1', 'birthday': datetime(2022, 10, 5)},
+        {'name': 'Ben_1', 'birthday': datetime(1986, 10, 5)},
         {'name': 'Dol_1', 'birthday': datetime(2022, 10, 6)}
     ]
-
     get_birthdays_per_week(users)
